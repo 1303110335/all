@@ -1,2 +1,6 @@
 # all
 yii
+
+yes
+
+fasdfhasdfhu
