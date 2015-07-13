@@ -9,7 +9,7 @@ class LoginForm extends CFormModel
 {
 	public $username;
 	public $password;
-	public $rememberMe;
+	//public $rememberMe;
 
 	private $_identity;
 
@@ -22,11 +22,14 @@ class LoginForm extends CFormModel
 	{
 		return array(
 			// username and password are required
-			array('username, password', 'required'),
+			array('username', 'required','message'=>'用户名必填'),
+		    array('password','required','message'=>'密码必填'),
 			// rememberMe needs to be a boolean
-			array('rememberMe', 'boolean'),
+			//array('rememberMe', 'boolean'),
 			// password needs to be authenticated
-			array('password', 'authenticate'),
+			//array('password', 'authenticate'),
+			//通过自定义方法校验密码的真实性
+			array('password','authenticate'),
 		);
 	}
 
@@ -36,7 +39,9 @@ class LoginForm extends CFormModel
 	public function attributeLabels()
 	{
 		return array(
-			'rememberMe'=>'Remember me next time',
+		    'username'=>'用户名',
+		    'password'=>'密码',
+			//'rememberMe'=>'Remember me next time',
 		);
 	}
 
@@ -67,8 +72,8 @@ class LoginForm extends CFormModel
 		}
 		if($this->_identity->errorCode===UserIdentity::ERROR_NONE)
 		{
-			$duration=$this->rememberMe ? 3600*24*30 : 0; // 30 days
-			Yii::app()->user->login($this->_identity,$duration);
+			//$duration=$this->rememberMe ? 3600*24*30 : 0; // 30 days
+			Yii::app()->user->login($this->_identity);//,$duration
 			return true;
 		}
 		else

@@ -1,5 +1,4 @@
 <?php
-	/*分页类*/
 	class Page {
 		private $total; //数据表中总记录数
 		private $listRows; //每页显示行数
@@ -60,7 +59,7 @@
 		}
 
 		private function first(){
-			$html = '';
+            $html = "";
 			if($this->page==1)
 				$html.='';
 			else
@@ -70,11 +69,12 @@
 		}
 
 		private function prev(){
-			$html = '';
+            $html = "";
 			if($this->page==1)
 				$html.='';
 			else
 				$html.="&nbsp;&nbsp;<a href='{$this->uri}&page=".($this->page-1)."'>{$this->config["prev"]}</a>&nbsp;&nbsp;";
+
 			return $html;
 		}
 
@@ -108,7 +108,7 @@
 		}
 
 		private function next(){
-			$html='';
+            $html = "";
 			if($this->page==$this->pageNum)
 				$html.='';
 			else
@@ -118,7 +118,7 @@
 		}
 
 		private function last(){
-			$html='';
+            $html = "";
 			if($this->page==$this->pageNum)
 				$html.='';
 			else
@@ -130,7 +130,6 @@
 		private function goPage(){
 			return '&nbsp;&nbsp;<input type="text" onkeydown="javascript:if(event.keyCode==13){var page=(this.value>'.$this->pageNum.')?'.$this->pageNum.':this.value;location=\''.$this->uri.'&page=\'+page+\'\'}" value="'.$this->page.'" style="width:25px"><input type="button" value="GO" onclick="javascript:var page=(this.previousSibling.value>'.$this->pageNum.')?'.$this->pageNum.':this.previousSibling.value;location=\''.$this->uri.'&page=\'+page+\'\'">&nbsp;&nbsp;';
 		}
-		
 		function fpage($display=array(0,1,2,3,4,5,6,7,8)){
 			$html[0]="&nbsp;&nbsp;共有<b>{$this->total}</b>{$this->config["header"]}&nbsp;&nbsp;";
 			$html[1]="&nbsp;&nbsp;每页显示<b>".($this->end()-$this->start()+1)."</b>条，本页<b>{$this->start()}-{$this->end()}</b>条&nbsp;&nbsp;";

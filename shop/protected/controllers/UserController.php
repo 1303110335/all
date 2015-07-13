@@ -8,10 +8,22 @@ class UserController extends Controller{
      *用户登录 
      */
     function actionLogin(){
-        //通过控制器方法调用视图
-        //renderPatial()调用视图
-        //$this ->renderPartial('login');
-        $this -> render('login');
+        $user_login = new LoginForm;
+        
+        if(isset($_POST['LoginForm'])){
+            $user_login -> attributes = $_POST['LoginForm'];
+            //校验方法走的是rules()方法
+            //不仅校验用户名和密码是否填写，还要校验密码的真实性
+            if($user_login ->validate()){
+                echo "succedd";
+            }else{
+                echo "fail";
+            }
+            
+        }
+        
+        
+        $this -> render('login',array('user_login'=>$user_login));
     }
     
     /*
