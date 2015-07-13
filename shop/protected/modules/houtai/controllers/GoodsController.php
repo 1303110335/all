@@ -3,13 +3,64 @@
  * 后台商品管理控制器 
  */
 class GoodsController extends Controller {
+    
+    /*实现用户访问控制*/
+    function filters(){
+        return array(
+            'accessControl'
+        );
+    }
+    
+    /*show add update del 等方法在访问时需要权限
+     * 为具体方法被访问设置条件
+     * */
+    function accessRules(){
+        return array(
+            //用户访问控制扩展
+            //add方法可以被无条件调用
+            array(
+                'allow',
+                'actions'=>array('add'),
+                'users'=>array('*'),
+            ),
+            //具体指定“用户”可以删除信息
+            array(
+                'allow',
+                'actions'=>array('del'),
+                'users'=>array('admin'),
+            ),
+            //匿名用户操作？
+            //有的控制器只有匿名用户可以访问
+            array(
+                'allow',
+                'actions'=>array('update'),
+                'users'=>array('?'),
+            ),
+            
+            array(
+                'allow',
+                'actions'=>array('show1'),
+                //@表示已登录的
+                'users'=>array('@'),
+            ),
+            array(
+                'deny',
+                //*代表所有用户都不允许访问
+                'users'=>array('*'),
+            ),
+        );
+        
+    }
+    
+    
+    
     /*
      * 商品展示
      */
-    function actionShow(){
+     function actionShow(){
     	//通过模型model实现数据表信息查询
     	//产生模型对象
-    	$goods_model=Goods::model();
+    	//$goods_model=Goods::model();
     	
     	//通过model模型对象调用方法
     	/*$goods_infos = $goods_model->find();//每次只可以查询一条商品信息
@@ -17,7 +68,7 @@ class GoodsController extends Controller {
     	echo $goods_infos->goods_price,"<br/>";*/
     	//var_dump($goods_infos);
     	
-    	$goods_infos = $goods_model->findAll();//查询出全部数据
+    	//$goods_infos = $goods_model->findAll();//查询出全部数据
 
     	/*foreach($goods_infos as $v){
     		echo $v->goods_name."--";
@@ -32,11 +83,10 @@ class GoodsController extends Controller {
     	//把获得的数据信息传递到视图模板中
     	//renderPartial('show',array('name'=>'value','name'=>'value'));
 
-        $this ->renderPartial('show',array('goods_infos'=>$goods_infos));
-    }
+        //$this ->renderPartial('show',array('goods_infos'=>$goods_infos));
+    } 
 
-    
-    
+
     /*
 	 *建立一个测试方法，来实现分页显示
 	 */
@@ -98,6 +148,7 @@ class GoodsController extends Controller {
      * 修改商品
      */
     function actionUpdate($id){
+        echo "succeed";exit;
 		//选择了那个商品
 		//框架对get信息进行封装
 		$goods_model = Goods::model();//一般除了add之外，都使用model方法来进行实例化
@@ -123,6 +174,7 @@ class GoodsController extends Controller {
 	 *删除商品信息
 	 */
     function actionDel($id){
+        
  		$goods_model = Goods::model();//一般除了add之外，都使用model方法来进行实例化
 		
  		$goods_info = $goods_model -> findByPk($id);//获得被删除对象的商品模型
@@ -158,21 +210,5 @@ class GoodsController extends Controller {
     	$this ->renderPartial('show',array('goods_infos'=>$infos));
     }
     
-    /*通过模型实现数据添加*/
-    /*function actionJia(){
-    	//创建模型对象
-    	$goods_model = new Goods();//我们需要添加数据，创建对象方式有别于查询
-    	
-    	//为对象丰富属性
-    	$goods_model->goods_name = 'iphone 6+';
-    	$goods_model->goods_price = 6999;
-    	$goods_model->goods_weight = 120;
-    	
-    	if($goods_model->save()){
-    		echo "success";
-    	}else{
-    		echo "fail";
-    	}
-    	
-    }*/
+    
 }

@@ -39,6 +39,7 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
+		    'loginUrl'=>'./index.php?r=user/login',
 		),
 		// uncomment the following to enable URLs in path-format
 		/*

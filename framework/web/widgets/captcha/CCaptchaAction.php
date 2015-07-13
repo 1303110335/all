@@ -115,6 +115,7 @@ class CCaptchaAction extends CAction
 	 */
 	public function run()
 	{
+	    
 		if(isset($_GET[self::REFRESH_GET_VAR]))  // AJAX request for regenerating code
 		{
 			$code=$this->getVerifyCode(true);

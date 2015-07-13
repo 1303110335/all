@@ -12,7 +12,7 @@
             <span>
                 <span style="float:left">当前位置是：商品管理-》添加商品信息</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-                    <a style="text-decoration: none" href="./index.php?r=houtai/goods/show">【返回】</a>
+                    <a style="text-decoration: none" href="./index.php?r=houtai/goods/show1">【返回】</a>
                 </span>
             </span>
         </div>

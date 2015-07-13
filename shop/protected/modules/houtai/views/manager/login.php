@@ -17,28 +17,31 @@
                         <li class="user_top_c"></li>
                         <li class="user_top_r"></li></ul>
                 </dd><dd id="user_main">
-                    <form action="#" method="post">
+                    <?php $form=$this->beginWidget('CActiveForm');?>
                         <ul>
                             <li class="user_main_l"></li>
                             <li class="user_main_c">
                                 <div class="user_main_box">
                                     <ul>
-                                        <li class="user_main_text">用户名： </li>
+                                        <li class="user_main_text"><?php echo $form->labelEx($user_login,'username');?></li>
                                         <li class="user_main_input">
-                                            <input class="TxtUserNameCssClass" id="admin_user" maxlength="20" name="admin_user"> </li></ul>
+                                            <?php echo $form->textField($user_login,'username',array('maxlength'=>20,'class'=>"TxtUserNameCssClass"));?>
+                                            <?php echo $form->error($user_login,'username');?>
+                                        </li></ul>
                                     <ul>
-                                        <li class="user_main_text">密&nbsp;&nbsp;&nbsp;&nbsp;码： </li>
+                                        <li class="user_main_text"><?php echo $form->labelEx($user_login,'password');?></li>
                                         <li class="user_main_input">
-                                            <input class="TxtPasswordCssClass" id="admin_psd" name="admin_psd" type="password">
+                                            <?php echo $form->passwordField($user_login,'password',array('class'=>"TxtUserNameCssClass"));?>
+                                            <?php echo $form->error($user_login,'password');?>
                                         </li>
                                     </ul>
-                                    <ul>
+                                    <!--  <ul>
                                         <li class="user_main_text">验证码： </li>
                                         <li class="user_main_input">
                                             <input class="TxtValidateCodeCssClass" id="captcha" name="captcha" type="text">
                                             <img src="<?php echo HOUTAI_IMG_URL; ?>admin.png"  alt="" />
                                         </li>
-                                    </ul>
+                                    </ul>-->
                                 </div>
                             </li>
                             <li class="user_main_r">
@@ -46,7 +49,7 @@
                                 <input style="border: medium none; background: url('<?php echo HOUTAI_IMG_URL; ?>user_botton.gif') repeat-x scroll left top transparent; height: 122px; width: 111px; display: block; cursor: pointer;" value="" type="submit">
                             </li>
                         </ul>
-                    </form>
+                    <?php $this->endWidget();?>
                 </dd><dd id="user_bottom">
                     <ul>
                         <li class="user_bottom_l"></li>

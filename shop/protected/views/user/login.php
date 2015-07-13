@@ -1,4 +1,7 @@
-
+<style type="text/css">
+    label .required {color:red;}
+    div .errorMessage{color:red;}
+</style>
 
 <div class="block box">
 
@@ -18,19 +21,36 @@
 						</tr>
 						<tr>
 							<td align="right"><?php echo $form->labelEx($user_login,'password');?></td>
-							<td><?php echo $form->passwordField($user_login,'password',array('size'=>15,'class'=>"inputBg"));?>
+							<td>
+							<?php echo $form->passwordField($user_login,'password',array('size'=>15,'class'=>"inputBg"));?>
 							<?php echo $form->error($user_login,'password');?></td>
 						</tr>
-						<!-- <tr>
-							<td colspan="2"><input value="1" name="remember" id="remember"
-								type="checkbox" /> <label for="remember">请保存我这次的登录信息。</label></td>
-						</tr> -->
+						
+						<tr>
+							<td align="right">
+							     <?php echo $form->labelEx($user_login,'verifyCode');?>
+							</td>
+							<td>
+    							<?php echo $form->textField($user_login,'verifyCode',array('size'=>15,'class'=>"inputBg"));?>
+    							<!-- 显示验证码图片/使用小物件 -->
+    							<?php $this->widget('CCaptcha');?>
+    							<?php echo $form->error($user_login,'verifyCode');?>
+							</td>
+						</tr> 
+						
+						<tr>
+							<td align="right" width="25%">
+							     <?php echo $form->checkBox($user_login,'rememberMe');?>
+							</td width="75%">
+							<td><?php echo $form->labelEx($user_login,'rememberMe');?></td>
+						</tr> 
 						<tr>
 							<td>&nbsp;</td>
-							<td align="left"><input name="act" value="act_login"
-								type="hidden" /> <input name="back_act" value="./index.php"
-								type="hidden" /> <input name="submit" value="" class="us_Submit"
-								type="submit" /></td>
+							<td align="left">
+    							<input name="act" value="act_login" type="hidden" /> 
+    							<input name="back_act" value="./index.php" type="hidden" /> 
+    							<input name="submit" value="" class="us_Submit" type="submit" />
+							</td>	
 						</tr>
 						<tr>
 							<td></td>
